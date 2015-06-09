@@ -1,0 +1,23 @@
+<div class='auth-forms text-center'>
+
+	<h2>Sign up</h2>
+	
+	<form ng-submit='register()' name='form'>
+		
+		<div ng-show='error || form.$error'>
+			<p ng-show='error' class='text-danger'>{{ error }}</p>
+
+		</div>
+		
+		<input type='email' ng-model='user.email' placeholder='Email' class='form-control'>
+		<br>
+		<input type='password' ng-model='user.password' placeholder='Password' class='form-control'>
+		<br>
+		<input type='password' ng-model='user.confirmPassword' placeholder='Confirm password' class='form-control'>
+		<br>
+		or <a href ui-sref="login">Already have an account?</a>
+		<br>
+		<br>
+		<input type='submit' value='Submit' class='btn btn-lg btn-primary'>
+	</form>
+</div>
