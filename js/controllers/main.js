@@ -1,7 +1,7 @@
 
-app.controller('MainCtrl', function($scope, $http){
-	$scope.eventGrab = [ {name:'event', favoritecolor:'blue, no yellow'} 
-	];
+app.controller('MainCtrl', function($scope, $http, currentAuth){
+
+	$scope.eventGrab = [ {name:'event', favoritecolor:'blue, no yellow'} ];
 
 	// $scope.eventGrab = $http.get('https://www.eventbriteapi.com/v3/events/san%20francisco')
 	// 		.then(
