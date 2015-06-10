@@ -21,6 +21,9 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 			delete newUser.confirmPassword;
 			delete newUser.password;
 
+			// store uid to match to authentication
+			newUser = angular.extend(newUser, simpleLogin);
+
 			// add user object to users
 			User.add(newUser).then(function(ref){
 				var id = ref.key();

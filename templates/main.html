@@ -4,5 +4,11 @@
 	</div>
 </div>
 
-<div class='col-sm-12'
+<div class='col-sm-12'>
+	<div ng-repeat='artist in artists'>
+		<img ng-src='artist.thumbnail'>
+		{{artist.name}}
+
+		<div class='btn btn-success' ng-click='followArtist(artistId, userId)'>Like</div>
+	</div>
 </div>

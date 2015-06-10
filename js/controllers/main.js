@@ -1,8 +1,12 @@
 
 app.controller('MainCtrl', function($scope, $http, currentAuth){
 
-	$scope.eventGrab = [ {name:'event', favoritecolor:'blue, no yellow'} ];
-
+	$scope.artists = [
+		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
+		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
+		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
+		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
+	];
 	// $scope.eventGrab = $http.get('https://www.eventbriteapi.com/v3/events/san%20francisco')
 	// 		.then(
 	// 			function (response) {
