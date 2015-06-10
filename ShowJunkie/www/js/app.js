@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.service.core',
     // The public API key services will use for this app
     api_key: '17f760d27c49bf8605ba90bc51dd92bcf4822f1b3e2f71e1',
     // Your GCM sender ID/project number (Uncomment if supporting Android)
-    //gcm_id: 'YOUR_GCM_ID'
+    gcm_id: '866122995486'
   });
 
 }])
@@ -47,5 +47,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.service.core',
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/home');
 
+});
+
+$rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+  console.log('Got token', data.token, data.platform);
+  // Do something with the token
 });
 
