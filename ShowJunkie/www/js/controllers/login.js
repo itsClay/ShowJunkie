@@ -1,7 +1,10 @@
 
 app.controller('LoginCtrl', function($scope, Auth, $state, User){
+	$scope.user = {};
 
 	$scope.login = function(){
+		console.log('login triggered')
+		console.log($scope.user);
 		Auth.loginUserIn($scope.user)
 			.then(function(){
 				// successful login
