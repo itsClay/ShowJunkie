@@ -8,6 +8,9 @@ An application that will notify users when their favorite artists will have a sh
 
 instructions:
 
-1. ``` git clone this repo ```
-2. cd into ShowJunkie
-3. ``` python -m SimpleHTTPServer ```
+```
+$ git clone <repo_url>
+$ cd ShowJunkie/ShowJunkie # Change into the ionic app
+$ bower install # Install client side dependencies
+$ ionic serve
+```
