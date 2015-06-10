@@ -5,6 +5,10 @@
 </div>
 
 <div class='col-sm-12'>
-	<h1>Hello</h1>
-	<pre>{{ eventGrab}}</pre>
+	<div ng-repeat='artist in artists'>
+		<img ng-src='artist.thumbnail'>
+		{{artist.name}}
+
+		<div class='btn btn-success' ng-click='followArtist(artistId, userId)'>Like</div>
+	</div>
 </div>
