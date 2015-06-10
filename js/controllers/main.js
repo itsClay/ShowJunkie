@@ -1,12 +1,26 @@
 
-app.controller('MainCtrl', function($scope, $http, currentAuth){
+app.controller('MainCtrl', function($scope, $http, currentAuth, Artist){
+	console.log(Artist.allArtists);
 
-	$scope.artists = [
-		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
-		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
-		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
-		{ name: 'blink-182', id: '348989348439', thumbnail: '/path/to/image.jpeg' },
+	var artistIds = [
 	];
+
+	artistIds.forEach(function(artistId){
+		Artist.getFromSpotify(artistId).then(function(res){
+			var artist = {
+				name: res.name,
+				genres: res.genres,
+				images: res.images
+			};
+
+			Artist.addToFirebase(artist);
+
+		});
+	});	
+
+	$scope.artists = Artist.allArtists;
+	console.log(Artist.allArtists)
+
 	// $scope.eventGrab = $http.get('https://www.eventbriteapi.com/v3/events/san%20francisco')
 	// 		.then(
 	// 			function (response) {
