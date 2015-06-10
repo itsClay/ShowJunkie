@@ -1,6 +1,5 @@
-angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $rootScope, $ionicPush, $ionicUser) {
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser) {
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
     console.log('Got token', data.token, data.platform);
   });

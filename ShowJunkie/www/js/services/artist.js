@@ -1,5 +1,4 @@
 
-
 app.factory('Artist', function(FIREBASE_URL, $firebaseArray, $http){
 	var ref = new Firebase(FIREBASE_URL + 'artists');
 
