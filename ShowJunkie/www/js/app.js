@@ -3,12 +3,17 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', [
+var app = angular.module('ShowJunkie', [
   'ionic', 
   'ionic.service.core', 
-  'ionic.service.push'])
+  'ionic.service.push',
+  'firebase'
+]);
 
-.config(['$ionicAppProvider', function($ionicAppProvider) {
+// Firebase forge URL
+app.constant('FIREBASE_URL', 'https://showjunkie.firebaseio.com/');
+
+app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
     // Your App ID
@@ -21,7 +26,7 @@ var app = angular.module('starter', [
 
 }])
 
-.run(function($ionicPlatform, $rootScope, $ionicPush, $cordovaPush) {
+.run(function($ionicPlatform, $rootScope, $ionicPush, $cordovaPush, $rootScope, $state, Auth) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -30,6 +35,17 @@ var app = angular.module('starter', [
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
+    }
+  });
+
+  // set current user
+  $rootScope.currentUser = Auth.authRef;
+
+  // protect routes, redirect to login page
+  $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+    // catch the error thrown by the $requireAuth promise (a $stateChangeError)
+    if (error === "AUTH_REQUIRED") {
+      $state.go("login");
     }
   });
 })
@@ -45,10 +61,39 @@ var app = angular.module('starter', [
       url: "/home",
       templateUrl: "templates/home.html",
       controller: 'MainCtrl'
-    });
+    })
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/home');
+    // routes from the website...
+    .state('home2', {
+      url: "/",
+      templateUrl: "templates/main.html",
+      controller: 'MainCtrl',
+      resolve: {
+        // controller will not be loaded until $requireAuth resolves
+        // Auth refers to our $firebaseAuth wrapper in the example above
+        "currentAuth": function(Auth) {
+          return Auth.authRef.$requireAuth();
+        }
+      }
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'templates/register.html',
+      controller: 'LoginCtrl'
+    })
+    .state('resetPassword', {
+      url: '/resetPassword',
+      templateUrl: 'templates/resetPassword.html',
+      controller: 'LoginCtrl'
+    })
+
+  // if none of the above states are matched
+  $urlRouterProvider.otherwise("/login");
 
 });
 
