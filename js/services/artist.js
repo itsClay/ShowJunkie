@@ -10,6 +10,7 @@ app.factory('Artist', function(FIREBASE_URL, $firebaseArray, $http){
 		getFromSpotify: function(id){
 			return $http.get('https://api.spotify.com/v1/artists/' + id)
 				.then(function(res){
+					console.log(res);
 					return res.data;
 				});
 		},

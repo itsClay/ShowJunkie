@@ -2,8 +2,7 @@
 app.controller('MainCtrl', function($scope, $http, currentAuth, Artist){
 	console.log(Artist.allArtists);
 
-	var artistIds = [
-	];
+	var artistIds = [];
 
 	artistIds.forEach(function(artistId){
 		Artist.getFromSpotify(artistId).then(function(res){
