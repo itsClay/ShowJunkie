@@ -19,7 +19,7 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 			// delete password for storage in users
 			delete newUser.confirmPassword;
-			delete newUser.password;
+			newUser.password;
 
 			// add user object to users
 			User.add(newUser).then(function(ref){
