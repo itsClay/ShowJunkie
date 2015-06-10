@@ -1,5 +1,17 @@
+<div ng-controller='LoginCtrl' class='row'>
+	<div class='col-md-6'>
+	<pre>{{currentUser | json}}</pre> <div class='btn btn-default pull-right' ng-click='logout()'>Logout</div>
+	</div>
+</div>
 
 <div class='col-sm-12'>
-	<h1>Hello</h1>
-	<pre>{{ eventGrab} </pre>
+	<div ng-repeat='artist in artists'>
+		<img ng-src='artist.thumbnail'>
+		{{artist.name}}
+
+		<div class='btn btn-success' ng-click='followArtist(artistId, userId)'>Like</div>
+	</div>
 </div>
+
+
+<pre>{{blink182 |json}}</pre>

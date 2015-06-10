@@ -1,7 +1,25 @@
 
-app.controller('MainCtrl', function($scope, $http){
-	$scope.eventGrab = [ {name:'event', favoritecolor:'blue, no yellow'} 
+app.controller('MainCtrl', function($scope, $http, currentAuth, Artist){
+	console.log(Artist.allArtists);
+
+	var artistIds = [
 	];
+
+	artistIds.forEach(function(artistId){
+		Artist.getFromSpotify(artistId).then(function(res){
+			var artist = {
+				name: res.name,
+				genres: res.genres,
+				images: res.images
+			};
+
+			Artist.addToFirebase(artist);
+
+		});
+	});	
+
+	$scope.artists = Artist.allArtists;
+	console.log(Artist.allArtists)
 
 	// $scope.eventGrab = $http.get('https://www.eventbriteapi.com/v3/events/san%20francisco')
 	// 		.then(

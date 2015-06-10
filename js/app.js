@@ -4,7 +4,18 @@ var app = angular.module('angular-starter', [
 	'firebase'
 ]);
 
-app.constant('FIREBASE_URL', 'https://showjunkie.firebaseio.com');
+app.run(function($rootScope, $state, Auth) {
+	$rootScope.currentUser = Auth.authRef;
+
+	$rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+	  // catch the error thrown by the $requireAuth promise (a $stateChangeError)
+	  if (error === "AUTH_REQUIRED") {
+	  	$state.go("login");
+	  }
+	});
+});
+
+app.constant('FIREBASE_URL', 'https://showjunkie.firebaseio.com/');
 
 // Now the $firebaseObject, $firebaseArray, and $firebaseAuth services 
 // are available to be injected into any controller, service, or factory.
@@ -15,9 +26,16 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 	$stateProvider
 	    .state('home', {
-	      url: "/",
-	      templateUrl: "templates/main.html",
-	      controller: 'MainCtrl'
+			url: "/",
+			templateUrl: "templates/main.html",
+			controller: 'MainCtrl',
+			resolve: {
+				// controller will not be loaded until $requireAuth resolves
+				// Auth refers to our $firebaseAuth wrapper in the example above
+				"currentAuth": function(Auth) {
+					return Auth.authRef.$requireAuth();
+				}
+			}
 	    })
 	    .state('login', {
 	    	url: '/login',

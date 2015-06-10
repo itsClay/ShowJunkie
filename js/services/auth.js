@@ -8,6 +8,7 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth){
 	var auth = $firebaseAuth(ref);
 
 	return {
+		authRef: auth,
 		loginUserIn: function(user){
 			return auth.$authWithPassword({ email: user.email, password: user.password });
 		},
@@ -17,10 +18,11 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth){
 			// Currently, the object only contains the created user’s uid
 			return auth.$createUser({ email: user.email, password: user.password })
 				.then(function(res){
-					console.log(res);
+					return res;
 				})
 				.catch(function(err){
 					console.log(err);
+					return err;
 				})
 		},
 		logout: function(){
