@@ -1,0 +1,23 @@
+{
+  "name": "ShowJunkie",
+  "version": "1.0.0",
+  "description": "An application that will notify users when their favorite artists will have a show coming to town.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsClay/ShowJunkie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsClay/ShowJunkie/issues"
+  },
+  "homepage": "https://github.com/itsClay/ShowJunkie",
+  "dependencies": {
+    "firebase": "^2.2.7",
+    "request": "^2.57.0"
+  }
+}
