@@ -27,6 +27,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.service.core',
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
+
+
     }
   });
 })
@@ -49,8 +51,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.service.core',
 
 });
 
-$rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-  console.log('Got token', data.token, data.platform);
-  // Do something with the token
-});
 
