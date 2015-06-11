@@ -37,7 +37,14 @@
 <body ng-app="ShowJunkie">
 <ion-pane>
     <ion-header-bar class="bar-positive">
-        <h1 class="title">Ionic Push Starter</h1>
+        <h1 class="title">ShowJunkie</h1>
+        <div class="buttons" ng-controller='LoginCtrl' ng-if='getCurrentUser()'>
+            <p ng-bind='getCurrentUser().password.email'>
+                {{getCurrentUser().password.email}}
+            </p>
+            <button class="button" ng-click='logout()'>Logout</button>
+
+        </div>
     </ion-header-bar>
     <ion-nav-view>
     </ion-nav-view>

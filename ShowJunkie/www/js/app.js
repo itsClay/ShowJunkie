@@ -40,9 +40,6 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
     }
   });
 
-  // set current user
-  $rootScope.currentUser = Auth.authRef;
-
   // protect routes, redirect to login page
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     // catch the error thrown by the $requireAuth promise (a $stateChangeError)
@@ -59,21 +56,23 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    .state('home', {
+    .state('ionic-push-starter', {
       url: "/home",
-      templateUrl: "templates/home.html",
+      templateUrl: "templates/ionic-push-starter.html",
       controller: 'MainCtrl'
     })
 
     // routes from the website...
-    .state('home2', {
+    .state('home', {
       url: "/",
       templateUrl: "templates/main.html",
       controller: 'MainCtrl',
       resolve: {
         // controller will not be loaded until $requireAuth resolves
         // Auth refers to our $firebaseAuth wrapper in the example above
-        "currentAuth": function(Auth) {
+        "currentAuth": function(Auth, $rootScope) {
+          $rootScope.getCurrentUser = Auth.getCurrentUser;
+
           return Auth.authRef.$requireAuth();
         }
       }
