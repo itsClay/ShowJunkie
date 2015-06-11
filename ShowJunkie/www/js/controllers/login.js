@@ -23,6 +23,7 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 			// store uid to match to authentication
 			newUser = angular.extend(newUser, simpleLogin);
+			newUser.following = ['blink-182'];
 
 			// add user object to users
 			User.add(newUser).then(function(ref){
@@ -32,7 +33,6 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 				Auth.loginUserIn({email: $scope.user.email, password: $scope.user.password })
 					.then(function(){
 						// success creating user and logging in
-						console.log($scope.currentUser)
 						$state.go('home');
 					})
 					.catch(function(err){

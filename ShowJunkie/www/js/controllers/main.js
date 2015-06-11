@@ -1,5 +1,5 @@
 
-app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, currentAuth) {
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, FIREBASE_URL, $firebaseObject) {
   // Push notification stuff...
 
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
@@ -44,6 +44,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
     // Display artists stuff...
     var artistIds = [];
 
+    // add artist to firebase base on list of spotify ids
     artistIds.forEach(function(artistId){
       Artist.getFromSpotify(artistId).then(function(res){
         var artist = {
@@ -58,6 +59,36 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
     }); 
 
     $scope.artists = Artist.allArtists;
+
+    $scope.followArtist = function(artistName){
+      return User.getCurrentUserSnapshot()
+        .on("value", function(snapshot){
+          // gets current user
+          var userObj = snapshot.val();
+
+          for(var userId in userObj){
+            
+            // refernece current user's data in firebase
+            var thisUserRef = new Firebase(FIREBASE_URL + 'users/' + userId);
+            var user = $firebaseObject(thisUserRef);
+
+            // create new following list
+            var following = angular.copy(userObj[userId].following);
+            following.push(artistName);
+            user.following = following;
+
+            console.log(following);
+
+            // send updated following list to firebase
+            user.$save();
+
+          }
+        });
+    };
+
+    $scope.getAllFollowing = function(artistName){
+      return User.getFollowing();
+    };    
 
 });
 

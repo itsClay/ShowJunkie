@@ -3,10 +3,15 @@
 	<div class='list'>
 		<div class="item item-divider" style='margin-top:43px;'> 
 	        Follow artists
+
 	    </div>
-		<ion-toggle ng-repeat='artist in artists' class="item item-avatar">
+
+		<ion-toggle ng-repeat='artist in artists' class="item item-avatar"
+			ng-checked='true' ng-change='followArtist(artist.name)' ng-model='artist'>
+
 			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
 			{{artist.name}}
+			{{artist}}
 
 		</ion-toggle>
 	</div>
