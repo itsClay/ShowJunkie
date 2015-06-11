@@ -1,5 +1,5 @@
 
-app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, FIREBASE_URL, $firebaseObject) {
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseObject) {
   // Push notification stuff...
 
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
@@ -39,56 +39,22 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
     }
 
 
-
-
-    // Display artists stuff...
-    var artistIds = [];
-
-    // add artist to firebase base on list of spotify ids
-    artistIds.forEach(function(artistId){
-      Artist.getFromSpotify(artistId).then(function(res){
-        var artist = {
-          name: res.name,
-          genres: res.genres,
-          images: res.images
-        };
-
-        Artist.addToFirebase(artist);
-
-      });
-    }); 
-
     $scope.artists = Artist.allArtists;
 
-    $scope.followArtist = function(artistName){
-      return User.getCurrentUserSnapshot()
-        .on("value", function(snapshot){
-          // gets current user
-          var userObj = snapshot.val();
+    $scope.isFollowingArtist = function(artistName){
+      var ref = new Firebase(FIREBASE_URL + 'following/' + artistName);
+      var curr_email = Auth.getCurrentUser().password.email;
 
-          for(var userId in userObj){
-            
-            // refernece current user's data in firebase
-            var thisUserRef = new Firebase(FIREBASE_URL + 'users/' + userId);
-            var user = $firebaseObject(thisUserRef);
+      console.log(curr_email)
+      // console.log($firebaseObject(ref));
 
-            // create new following list
-            var following = angular.copy(userObj[userId].following);
-            following.push(artistName);
-            user.following = following;
+      ref.orderByChild('id').equalTo(curr_email).on('child_added', function(snap){
+        console.log(snap.val());
+        console.log('found it!')
+      });
 
-            console.log(following);
-
-            // send updated following list to firebase
-            user.$save();
-
-          }
-        });
+      return true
     };
-
-    $scope.getAllFollowing = function(artistName){
-      return User.getFollowing();
-    };    
 
 });
 

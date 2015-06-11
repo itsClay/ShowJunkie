@@ -14,11 +14,8 @@ app.factory('User', function(FIREBASE_URL, $firebaseArray, Auth){
 		get: function(id){
 			return users.$getRecord(id);
 		},
-		updateUserList: function(user){
-			return users.$save(user);
-		},
 		followArtist: function(artistName){
-			
+			// follow artist on firebase
 			return Auth.getCurrentUser();
 		},
 		getCurrentUserSnapshot: function(){
