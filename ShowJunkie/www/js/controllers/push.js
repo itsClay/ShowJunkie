@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
+app.controller('pushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
 
 
   $scope.identifyUser = function() {

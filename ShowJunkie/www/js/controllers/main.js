@@ -1,6 +1,7 @@
 
 app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseArray) {
   // Push notification stuff...
+    console.log('main controller sucks')
 
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
       console.log('Got token', data.token, data.platform);

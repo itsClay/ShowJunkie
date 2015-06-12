@@ -63,7 +63,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
     .state('ionic-push-starter', {
       url: "/home",
       templateUrl: "templates/ionic-push-starter.html",
-      controller: 'MainCtrl'
+      controller: 'pushCtrl'
     })
 
     // routes from the website...
