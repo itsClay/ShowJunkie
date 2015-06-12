@@ -36,11 +36,10 @@ spotifyIds.forEach(function(spotifyId){
 		        	images: response.images
 		        });
 
-		        fref.set([
-		        	'connorleech@gmail.com',
-		        	'clay@gmail.com',
-		        	'janna@gmail.com'
-		        ]);
+		        fref.push('connorleech@gmail.com');
+		        fref.push('clay@gmail.com');
+		        fref.push('janna@gmail.com');
+		    
 		    }
 		});
 
