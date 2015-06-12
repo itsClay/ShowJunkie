@@ -60,10 +60,10 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    .state('home', {
+    .state('ionic-push-starter', {
       url: "/home",
       templateUrl: "templates/home.html",
-      controller: 'MainCtrl'
+      controller: 'pushCtrl'
     })
 
     // routes from the website...
