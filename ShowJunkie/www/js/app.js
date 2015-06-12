@@ -7,7 +7,8 @@ var app = angular.module('ShowJunkie', [
   'ionic', 
   'ionic.service.core', 
   'ionic.service.push',
-  'firebase'
+  'firebase',
+  'ngCordova'
 ]);
 
 // Firebase forge URL
