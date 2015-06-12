@@ -36,6 +36,7 @@ spotifyIds.forEach(function(spotifyId){
 		        	images: response.images
 		        });
 
+		        // Add to following
 		        fref.push('connorleech@gmail.com');
 		        fref.push('clay@gmail.com');
 		        fref.push('janna@gmail.com');

@@ -6,8 +6,10 @@
 
 	    </div>
 
+	    <!-- ng-change='updateFollowing(artist.name)' -->
 		<ion-toggle ng-repeat='artist in artists' class="item item-avatar"
-			ng-checked='isFollowingArtist(artist.name)' ng-change='followArtist(artist.name)' ng-model='artist'>
+			 ng-change='updateFollowing(artist.name, $index)'
+			ng-model='followingArtists[artist.name]'>
 
 			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
 			{{artist.name}}
