@@ -1,39 +1,52 @@
+app.controller('MainCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
 
-app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser) {
-  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-    console.log('Got token', data.token, data.platform);
+  $ionicAppProvider.identify({
+    app_id: 'INSERT_APP_ID',
+    api_key: 'INSERT_PUBLIC_KEY',
+    dev_push: true
   });
-  //Basic registration
-  $scope.pushRegister = function() {
-    alert('Registering...');
 
-    $ionicPush.register({
-      canShowAlert: false,
-      onNotification: function(notification) {
-        // Called for each notification for custom handling
-        $scope.lastNotification = JSON.stringify(notification);
-      }
-    }).then(function(deviceToken) {
-      $scope.token = deviceToken;
-    });
-  }
   $scope.identifyUser = function() {
-    alert('Identifying');
-    console.log('Identifying user');
+   var user = $ionicUser.get();
+   if(!user.user_id) {
+   // Set your user_id here, or generate a random one.
+   user.user_id = $ionicUser.generateGUID();
+   };
+   
+   // Metadata
+   angular.extend(user, {
+   name: 'Test User',
+   bio: 'Full of Awesomeness'
+   });
+   
+   // Identify your user with the Ionic User Service
+   $ionicUser.identify(user).then(function(){
+   $scope.identified = true;
+   console.log('Identified user ' + user.name + '\n ID ' + user.user_id);
+   });
+  };
 
-    var user = $ionicUser.get();
-    if(!user.user_id) {
-      // Set your user_id here, or generate a random one
-      user.user_id = $ionicUser.generateGUID()
-    };
+  // Registers a device for push notifications
+  $scope.pushRegister = function() {
+   console.log('Ionic Push: Registering user');
+   
+   // Register with the Ionic Push service.  All parameters are optional.
+   $ionicPush.register({
+     canShowAlert: true, //Can pushes show an alert on your screen?
+     canSetBadge: true, //Can pushes update app icon badges?
+     canPlaySound: true, //Can notifications play a sound?
+     canRunActionsOnWake: true, //Can run actions outside the app,
+     onNotification: function(notification) {
+       // Handle new push notifications here
+       return true;
+     }
+   });
+  };
 
-    angular.extend(user, {
-      name: 'Test User',
-      message: 'I come from planet Ion'
-    });
+  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+    alert("Successfully registered token " + data.token);
+    console.log('Ionic Push: Got token ', data.token, data.platform);
+    $scope.token = data.token;
+  });
 
-    $ionicUser.identify(user);
-    
-  }
-})
-
+});
