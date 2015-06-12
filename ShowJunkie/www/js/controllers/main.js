@@ -56,6 +56,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
 
         for(var key in artistFollowers){
           if(curr_email === artistFollowers[key]){
+            // if current user is following an artist show it on the page
             $scope.followingArtists[artist] = true;
           }
           
@@ -70,13 +71,13 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
       var artistFollowing = $firebaseArray(ref);
 
       if($scope.followingArtists[artistName]){
-        console.log('its true')
+        // current user follows artist
         artistFollowing.$add(curr_email);
       } else {
         artistFollowing.$loaded().then(function(follower){
           for(var key in follower){
             if(follower[key].$value === curr_email){
-              console.log(follower[key])
+              // current user unfollows artist
               artistFollowing.$remove(follower[key]);
             }
           }
