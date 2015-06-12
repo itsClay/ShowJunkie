@@ -1,9 +1,13 @@
 app.controller('MainCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
 
   $ionicAppProvider.identify({
-    app_id: 'INSERT_APP_ID',
-    api_key: 'INSERT_PUBLIC_KEY',
-    dev_push: true
+    // Your App ID
+    app_id: 'ea8f9c0e',
+    // The public API key services will use for this app
+    api_key: '17f760d27c49bf8605ba90bc51dd92bcf4822f1b3e2f71e1',
+    // Your GCM sender ID/project number (Uncomment if supporting Android)
+    gcm_id: '866122995486',
+    dev_push = true;
   });
 
   $scope.identifyUser = function() {
