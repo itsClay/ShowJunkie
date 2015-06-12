@@ -1,5 +1,5 @@
 
-app.factory('User', function(FIREBASE_URL, $firebaseArray){
+app.factory('User', function(FIREBASE_URL, $firebaseArray, Auth){
 	var ref = new Firebase(FIREBASE_URL + 'users');
 
 	var users = $firebaseArray(ref);
@@ -14,8 +14,10 @@ app.factory('User', function(FIREBASE_URL, $firebaseArray){
 		get: function(id){
 			return users.$getRecord(id);
 		},
-		delete: function(){
-
+		getCurrentUserSnapshot: function(){
+			// get current user snapshot
+			var email = Auth.getCurrentUser().password.email;
+			return ref.orderByChild('email').equalTo(email);
 		}
 	};
 });

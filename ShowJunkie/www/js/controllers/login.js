@@ -3,8 +3,6 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 	$scope.user = {};
 
 	$scope.login = function(){
-		console.log('login triggered')
-		console.log($scope.user);
 		Auth.loginUserIn($scope.user)
 			.then(function(){
 				// successful login
@@ -21,11 +19,11 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 			var newUser = angular.copy($scope.user);
 
 			// delete password for storage in users
-			delete newUser.confirmPassword;
-			newUser.password;
+			delete newUser.password;
 
 			// store uid to match to authentication
 			newUser = angular.extend(newUser, simpleLogin);
+			newUser.following = ['blink-182'];
 
 			// add user object to users
 			User.add(newUser).then(function(ref){
@@ -57,7 +55,7 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 	$scope.resetPassword = function(){
 		// TODO
-	}
+	};
 
 });
 

@@ -1,47 +1,92 @@
-app.controller('pushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
+
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseArray) {
+  // Push notification stuff...
+
+    $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+      console.log('Got token', data.token, data.platform);
+    });
+    //Basic registration
+    $scope.pushRegister = function() {
+      alert('Registering...');
+
+      $ionicPush.register({
+        canShowAlert: false,
+        onNotification: function(notification) {
+          // Called for each notification for custom handling
+          $scope.lastNotification = JSON.stringify(notification);
+        }
+      }).then(function(deviceToken) {
+        $scope.token = deviceToken;
+      });
+    }
+    $scope.identifyUser = function() {
+      alert('Identifying');
+      console.log('Identifying user');
+
+      var user = $ionicUser.get();
+      if(!user.user_id) {
+        // Set your user_id here, or generate a random one
+        user.user_id = $ionicUser.generateGUID()
+      };
+
+      angular.extend(user, {
+        name: 'Test User',
+        message: 'I come from planet Ion'
+      });
+
+      $ionicUser.identify(user);
+      
+    }
 
 
-  $scope.identifyUser = function() {
-   var user = $ionicUser.get();
-   if(!user.user_id) {
-   // Set your user_id here, or generate a random one.
-   user.user_id = $ionicUser.generateGUID();
-   };
-   
-   // Metadata
-   angular.extend(user, {
-   name: 'Test User',
-   bio: 'Full of Awesomeness'
-   });
-   
-   // Identify your user with the Ionic User Service
-   $ionicUser.identify(user).then(function(){
-   $scope.identified = true;
-   console.log('Identified user ' + user.name + '\n ID ' + user.user_id);
-   });
-  };
+    $scope.artists = Artist.allArtists;
 
-  // Registers a device for push notifications
-  $scope.pushRegister = function() {
-   console.log('Ionic Push: Registering user');
-   
-   // Register with the Ionic Push service.  All parameters are optional.
-   $ionicPush.register({
-     canShowAlert: true, //Can pushes show an alert on your screen?
-     canSetBadge: true, //Can pushes update app icon badges?
-     canPlaySound: true, //Can notifications play a sound?
-     canRunActionsOnWake: true, //Can run actions outside the app,
-     onNotification: function(notification) {
-       // Handle new push notifications here
-       return true;
-     }
-   });
-  };
+    var ref = new Firebase(FIREBASE_URL + 'following/');
+    var following = $firebaseArray(ref);
+    var curr_email = Auth.getCurrentUser().password.email;
 
-  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-    alert("Successfully registered token " + data.token);
-    console.log('Ionic Push: Got token ', data.token, data.platform);
-    $scope.token = data.token;
-  });
+    $scope.followingArtists = {};
+
+    // wait until following array has loaded
+    following.$loaded().then(function(res){
+
+      // go through all followers for every artist
+      angular.forEach(following, function(artistFollowers){
+        var artist = artistFollowers.$id;
+
+        for(var key in artistFollowers){
+          if(curr_email === artistFollowers[key]){
+            // if current user is following an artist show it on the page
+            $scope.followingArtists[artist] = true;
+          }
+          
+        }
+      });
+    });
+
+
+    $scope.updateFollowing = function(artistName){
+
+      var ref = new Firebase(FIREBASE_URL + 'following/' + artistName);
+      var artistFollowing = $firebaseArray(ref);
+
+      if($scope.followingArtists[artistName]){
+        // current user follows artist
+        artistFollowing.$add(curr_email);
+      } else {
+        artistFollowing.$loaded().then(function(follower){
+          for(var key in follower){
+            if(follower[key].$value === curr_email){
+              // current user unfollows artist
+              artistFollowing.$remove(follower[key]);
+            }
+          }
+
+        });
+      }
+      
+
+    };
 
 });
+

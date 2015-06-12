@@ -1,17 +1,21 @@
-<div ng-controller='LoginCtrl' class='row'>
-	<div class='col-md-6'>
-	<pre>{{currentUser | json}}</pre> <div class='btn btn-default pull-right' ng-click='logout()'>Logout</div>
+<ion-content>
+	
+	<div class='list'>
+		<div class="item item-divider" style='margin-top:43px;'> 
+	        Follow artists
+
+	    </div>
+
+	    <!-- ng-change='updateFollowing(artist.name)' -->
+		<ion-toggle ng-repeat='artist in artists' class="item item-avatar"
+			 ng-change='updateFollowing(artist.name, $index)'
+			ng-model='followingArtists[artist.name]'>
+
+			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
+			{{artist.name}}
+
+		</ion-toggle>
 	</div>
-</div>
-
-<div class='col-sm-12'>
-	<div ng-repeat='artist in artists'>
-		<img ng-src='artist.thumbnail'>
-		{{artist.name}}
-
-		<div class='btn btn-success' ng-click='followArtist(artistId, userId)'>Like</div>
-	</div>
-</div>
+</ion-content>
 
 
-<pre>{{blink182 |json}}</pre>

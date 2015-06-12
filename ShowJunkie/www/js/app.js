@@ -62,19 +62,21 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   $stateProvider
     .state('ionic-push-starter', {
       url: "/home",
-      templateUrl: "templates/home.html",
-      controller: 'pushCtrl'
+      templateUrl: "templates/ionic-push-starter.html",
+      controller: 'MainCtrl'
     })
 
     // routes from the website...
-    .state('home2', {
+    .state('home', {
       url: "/",
       templateUrl: "templates/main.html",
       controller: 'MainCtrl',
       resolve: {
         // controller will not be loaded until $requireAuth resolves
         // Auth refers to our $firebaseAuth wrapper in the example above
-        "currentAuth": function(Auth) {
+        "currentAuth": function(Auth, $rootScope) {
+          $rootScope.getCurrentUser = Auth.getCurrentUser;
+
           return Auth.authRef.$requireAuth();
         }
       }

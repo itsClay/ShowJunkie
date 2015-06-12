@@ -1,5 +1,5 @@
 
-app.factory('Auth', function(FIREBASE_URL, $firebaseAuth){
+app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
 	var ref = new Firebase(FIREBASE_URL);
 	
 	// authentication object returned by $firebaseAuth contains several 
@@ -8,8 +8,13 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth){
 	var auth = $firebaseAuth(ref);
 
 	return {
+		// used in protecting routes
+		getCurrentUser: function(){
+			return auth.$getAuth();
+		},
 		authRef: auth,
 		loginUserIn: function(user){
+
 			return auth.$authWithPassword({ email: user.email, password: user.password });
 		},
 
