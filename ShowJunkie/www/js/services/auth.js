@@ -10,9 +10,11 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
 	return {
 		// used in protecting routes
 		getCurrentUser: function(){
+			this.currentUser = auth.$getAuth();
 			return auth.$getAuth();
 		},
 		authRef: auth,
+		currentUser: null,
 		loginUserIn: function(user){
 
 			return auth.$authWithPassword({ email: user.email, password: user.password });

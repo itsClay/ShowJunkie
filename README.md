@@ -13,7 +13,7 @@ $ git clone <repo_url>
 $ cd ShowJunkie/ShowJunkie # Change into the ionic app
 $ bower install # Install client side dependencies
 $ ionic serve
+$ cd server
+$ npm install
 ```
 
-cd server
-npm install
