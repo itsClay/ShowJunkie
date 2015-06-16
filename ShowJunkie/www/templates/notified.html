@@ -11,8 +11,11 @@
 	    	</label>
 	    </div>
 	    <!-- ng-change='updateFollowing(artist.name)' -->
-		<ion-list ng-repeat='event in myEvents track by $index' class="item item-avatar">
-			{{event.title}} - <a ng-href='{{event.ticket_url}}'>Buy tickets</a>
+		<ion-list ng-repeat='event in myEvents track by $index | filter:showSearchText | orderBy: "-formatted_datetime"' class="item item-avatar">
+			<img ng-src='{{event.thumb_url}}'>
+			{{event.title}} - <button class="button button-calm buy" ng-href='{{event.ticket_url}}{{event.ticket_status}}'>Buy tickets</button>
+			<br/>
+			{{event.formatted_datetime}}
 		</ion-list>
 
 		<div class="list list-inset">
