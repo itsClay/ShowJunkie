@@ -1,5 +1,5 @@
 
-app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseArray, $rootScope) {
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseArray, Notified) {
   // Push notification stuff...
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
       console.log('Got token', data.token, data.platform);
@@ -39,30 +39,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
 
 
     $scope.artists = Artist.allArtists;
-
-    var ref = new Firebase(FIREBASE_URL + 'following/');
-    var following = $firebaseArray(ref);
-    var curr_email = Auth.getCurrentUser().password.email;
-
-    $rootScope.followingArtists = {};
-
-    // wait until following array has loaded
-    following.$loaded().then(function(res){
-
-      // go through all followers for every artist
-      angular.forEach(following, function(artistFollowers){
-        var artist = artistFollowers.$id;
-
-        for(var key in artistFollowers){
-          if(curr_email === artistFollowers[key]){
-            // if current user is following an artist show it on the page
-            $rootScope.followingArtists[artist] = true;
-          }
-          
-        }
-      });
-    });
-
+    Notified.getFollowingArtists()
 
     $scope.updateFollowing = function(artistName){
 
