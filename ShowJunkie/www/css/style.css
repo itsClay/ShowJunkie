@@ -5,3 +5,7 @@
 	text-align: center;
 	background-color: rgba(0, 207, 255, 0.31);
 }
+
+.buy {
+	float: right;
+}
