@@ -13,6 +13,7 @@ var app = angular.module('ShowJunkie', [
 
 // Firebase forge URL
 app.constant('FIREBASE_URL', 'https://showjunkie.firebaseio.com/');
+app.constant('FACEBOOK_ID', '958743297517139');
 
 app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
@@ -51,6 +52,15 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
       $state.go("login");
     }
   });
+
+  Auth.authRef.$onAuth(function(authData){
+    if(authData){
+      alert(JSON.stringify(authData));
+      Auth.getCurrentUser();
+      $state.go('home');
+    }
+
+  })
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -75,7 +85,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
         // Auth refers to our $firebaseAuth wrapper in the example above
         "currentAuth": function(Auth, $rootScope) {
           $rootScope.getCurrentUser = Auth.getCurrentUser;
-
+          Auth.getCurrentUser();
           return Auth.authRef.$requireAuth();
         }
       }

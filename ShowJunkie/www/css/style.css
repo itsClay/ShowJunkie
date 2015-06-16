@@ -10,6 +10,7 @@
 	float: right;
 }
 
+/* tip about top-bar: http://www.sitepoint.com/5-ionic-app-development-tips-tricks/ */
 .platform-ios.platform-cordova:not(.fullscreen) .search-bar {
     margin-top: 20px;
 }

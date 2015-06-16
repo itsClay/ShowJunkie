@@ -1,8 +1,8 @@
 
-app.controller('LoginCtrl', function($scope, Auth, $state, User){
+app.controller('LoginCtrl', function($scope, Auth, $state, User, $cordovaOauth, FACEBOOK_ID, FIREBASE_URL, $firebaseAuth){
 	$scope.user = {};
 
-	if(Auth.getCurrentUser() !== null){
+	if(Auth.currentUser !== null){
 		// user is already logged in
 		$state.go('home');
 	}
@@ -28,7 +28,6 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 			// store uid to match to authentication
 			newUser = angular.extend(newUser, simpleLogin);
-			newUser.following = ['blink-182'];
 
 			// add user object to users
 			User.add(newUser).then(function(ref){
@@ -52,6 +51,29 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 		
 	};
 
+	var ref = new Firebase(FIREBASE_URL);
+	var auth = $firebaseAuth(ref);
+
+	$scope.registerWithFacebook = function(){
+		$cordovaOauth.facebook(FACEBOOK_ID, ['email'])
+			.then(function(result){
+
+				auth.$authWithOAuthToken("facebook", result.access_token)
+					.then(function(authData) {
+		                var user_data = JSON.stringify(authData);
+		                var current = JSON.stringify(Auth.getCurrentUser());
+		                
+		                $state.go('home');
+
+		            }, function(error) {
+		            	alert(JSON.stringify(error));
+		            });
+			}, function(error) {
+				alert(JSON.stringify(error));
+        	});
+
+	}
+
 	$scope.logout = function(){
 		Auth.logout();
 		$state.go('login');
@@ -60,6 +82,15 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 	$scope.resetPassword = function(){
 		// TODO
+		// https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-users-and-authentication-resetpasswordcredentials
+		// $scope.authObj.$resetPassword({
+		//   email: "my@email.com"
+		// }).then(function() {
+		//   console.log("Password reset email sent successfully!");
+		// }).catch(function(error) {
+		//   console.error("Error: ", error);
+		// });
+		
 	};
 
 });
