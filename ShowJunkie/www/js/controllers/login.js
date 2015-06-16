@@ -2,6 +2,11 @@
 app.controller('LoginCtrl', function($scope, Auth, $state, User){
 	$scope.user = {};
 
+	if(Auth.getCurrentUser() !== null){
+		// user is already logged in
+		$state.go('home');
+	}
+
 	$scope.login = function(){
 		Auth.loginUserIn($scope.user)
 			.then(function(){
