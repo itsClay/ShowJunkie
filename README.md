@@ -17,3 +17,9 @@ $ cd server
 $ npm install
 ```
 
+
+
+generate key tool:
+```
+$ keytool -exportcert alias_name -storepass showjunkie -keystore my-release-key.keystore | openssl sha1 -binary | openssl base64
+```
