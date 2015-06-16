@@ -1,5 +1,5 @@
 
-app.controller('LoginCtrl', function($scope, Auth, $state, User, $cordovaOauth, FACEBOOK_ID, FIREBASE_URL, $firebaseAuth){
+app.controller('LoginCtrl', function($scope, Auth, $state, User){
 	$scope.user = {};
 
 	if(Auth.currentUser !== null){
@@ -51,28 +51,9 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User, $cordovaOauth, 
 		
 	};
 
-	var ref = new Firebase(FIREBASE_URL);
-	var auth = $firebaseAuth(ref);
-
 	$scope.registerWithFacebook = function(){
-		$cordovaOauth.facebook(FACEBOOK_ID, ['email'])
-			.then(function(result){
-
-				auth.$authWithOAuthToken("facebook", result.access_token)
-					.then(function(authData) {
-		                var user_data = JSON.stringify(authData);
-		                var current = JSON.stringify(Auth.getCurrentUser());
-		                
-		                $state.go('home');
-
-		            }, function(error) {
-		            	alert(JSON.stringify(error));
-		            });
-			}, function(error) {
-				alert(JSON.stringify(error));
-        	});
-
-	}
+		Auth.registerWithFacebook();
+	};
 
 	$scope.logout = function(){
 		Auth.logout();

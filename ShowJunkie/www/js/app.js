@@ -55,7 +55,6 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
 
   Auth.authRef.$onAuth(function(authData){
     if(authData){
-      alert(JSON.stringify(authData));
       Auth.getCurrentUser();
       $state.go('home');
     }

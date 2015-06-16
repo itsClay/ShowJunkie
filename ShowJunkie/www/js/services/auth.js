@@ -1,7 +1,7 @@
 
-app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
+app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope, $cordovaOauth, FACEBOOK_ID){
 	var ref = new Firebase(FIREBASE_URL);
-	
+
 	// authentication object returned by $firebaseAuth contains several 
 	// methods for authenticating users, responding to changes in 
 	// authentication state, and managing user accounts for email/password users
@@ -34,6 +34,24 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
 		},
 		logout: function(){
 			return auth.$unauth();
+		},
+		registerWithFacebook: function(){
+			$cordovaOauth.facebook(FACEBOOK_ID, ['email'])
+			.then(function(result){
+
+				auth.$authWithOAuthToken("facebook", result.access_token)
+					.then(function(authData) {
+		                var user_data = JSON.stringify(authData);
+		                var current = JSON.stringify(Auth.getCurrentUser());
+		                
+		                $state.go('home');
+
+		            }, function(error) {
+		            	alert(JSON.stringify(error));
+		            });
+			}, function(error) {
+				alert(JSON.stringify(error));
+        	});
 		}
 	};
 
