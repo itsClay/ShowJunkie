@@ -11,16 +11,10 @@
 	    	</label>
 	    </div>
 	    <!-- ng-change='updateFollowing(artist.name)' -->
-		<ion-toggle 
+		<ion-list ng-repeat='event in myEvents track by $index' class="item item-avatar">
+			{{event.title}} - <a ng-href='{{event.ticket_url}}'>Buy tickets</a>
+		</ion-list>
 
-			ng-repeat='artist in artists | filter:showSearchText | limitTo: feedLimit' class="item item-avatar"
-			ng-change='updateFollowing(artist.name, $index)'
-			ng-model='followingArtists[artist.name]'>
-
-			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
-
-			{{artist.name}}
-		</ion-toggle>
 		<div class="list list-inset">
 			<div class="item" id="showMore"
 			ng-click="feedLimit = feedLimit + 10">Show More...</div>

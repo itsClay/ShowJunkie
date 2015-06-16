@@ -83,10 +83,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
     .state('notified', {
       url: "/notified",
       templateUrl: "templates/notified.html",
-      controller: 'notifiedCtrl',
-      resolve: {
-        followingArtists: MainCtrl.followingArtists
-      }
+      controller: 'notifiedCtrl'
     })
     .state('login', {
       url: '/login',
