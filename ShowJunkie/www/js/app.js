@@ -65,7 +65,6 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
       templateUrl: "templates/ionic-push-starter.html",
       controller: 'pushCtrl'
     })
-
     // routes from the website...
     .state('home', {
       url: "/",
@@ -79,6 +78,14 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
 
           return Auth.authRef.$requireAuth();
         }
+      }
+    })
+    .state('notified', {
+      url: "/notified",
+      templateUrl: "templates/notified.html",
+      controller: 'notifiedCtrl',
+      resolve: {
+        followingArtists: MainCtrl.followingArtists
       }
     })
     .state('login', {
