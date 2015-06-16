@@ -1,3 +1,3 @@
-app.controller('notifiedCtrl', function () {
-
+app.controller('notifiedCtrl', function ($scope) {
+	
 });

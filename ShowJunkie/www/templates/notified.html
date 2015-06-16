@@ -1,23 +1,46 @@
 <ion-content ui-view>
 
+	<div class='list'>
+		<div class="item item-divider" style='margin-top:43px;'> 
+	        Your Shows
+	    </div>
+	    <!-- Filter Search -->
+	    <div class="list">
+	    	<label class="item item-input">
+	    		<input type="text" placeholder="Show/Artist" data-ng-model="showSearchText">
+	    	</label>
+	    </div>
+	    <!-- ng-change='updateFollowing(artist.name)' -->
+		<ion-toggle 
 
-<!-- 
-<div>
-<ion-tabs class="tabs-positive tabs-icon-only">
+			ng-repeat='artist in artists | filter:showSearchText | limitTo: feedLimit' class="item item-avatar"
+			ng-change='updateFollowing(artist.name, $index)'
+			ng-model='followingArtists[artist.name]'>
 
+			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
 
-  <ion-tab title="home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline">
-	<a ui-sref="home"></a>
+			{{artist.name}}
+		</ion-toggle>
+		<div class="list list-inset">
+			<div class="item" id="showMore"
+			ng-click="feedLimit = feedLimit + 10">Show More...</div>
+		</div>
+		<br />
+	</div>
+	<!-- Navigation -->
+	<div>
+	  <ion-tabs class="tabs-positive tabs-icon-only">
 
-  </ion-tab>
+	    <ion-tab title="home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" href="#/">
+	    <!-- Tab 1 content -->
+	  	</ion-tab>
 
-  <ion-tab title="notified" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">	
-	<a ui-sref="notified"></a>
+	  	<ion-tab title="notified" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" href="#/notified">
+	    <!-- Tab 2 content -->
+	  	</ion-tab>
 
-  </ion-tab>
-</ion-tabs>
-</div>
- -->
+	  </ion-tabs>
+	</div>
 </ion-content>
 
 
