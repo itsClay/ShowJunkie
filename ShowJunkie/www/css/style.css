@@ -1,1 +1,7 @@
 /* Empty. Add your own CSS if you like */
+
+#showMore {
+	margin-bottom: inherit;
+	text-align: center;
+	background-color: rgba(0, 207, 255, 0.31);
+}

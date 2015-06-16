@@ -65,7 +65,11 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
       templateUrl: "templates/ionic-push-starter.html",
       controller: 'pushCtrl'
     })
-
+    .state('notified', {
+      url: "/notified",
+      templateUrl: "templates/notified.html",
+      controller: 'notifiedCtrl',
+    })
     // routes from the website...
     .state('home', {
       url: "/",

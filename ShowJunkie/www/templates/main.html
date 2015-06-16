@@ -1,5 +1,5 @@
-<ion-content>
-	
+<ion-content ui-view>
+
 	<div class='list'>
 		<div class="item item-divider" style='margin-top:43px;'> 
 	        Follow artists
@@ -18,9 +18,30 @@
 			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
 			{{artist.name}}
 		</ion-toggle>
-		<button class="button button-outline button-positive"
-   ng-click="feedLimit = feedLimit + 10">Show More...</button>
+		<div class="list list-inset">
+			<div class="item" id="showMore"
+			ng-click="feedLimit = feedLimit + 10">Show More...</div>
+		</div>
+		<br />
 	</div>
+
+<div>
+  <ion-tabs class="tabs-positive tabs-icon-only">
+
+    <ion-tab title="home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline">
+  	  <!-- <a ui-sref="home"></a> -->
+    <!-- Tab 1 content -->
+  	</ion-tab>
+
+  	<ion-tab title="notified" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">
+
+  	  <!-- <a ui-sref="notified"></a> -->
+    <!-- Tab 2 content -->
+  	</ion-tab>
+
+  </ion-tabs>
+</div>
+
 </ion-content>
 
 

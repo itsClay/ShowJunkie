@@ -1,26 +1,23 @@
-<ion-content>
-	
-	<div class='list'>
-		<div class="item item-divider" style='margin-top:43px;'> 
-	        Follow artists
-	    </div>
-	    <div class="list">
-	    	<label class="item item-input">
-	    		<input type="text" placeholder="Artist/Genre" data-ng-model="searchText">
-	    	</label>
-	    </div>
-	    <!-- Filter Search -->
-	    <!-- ng-change='updateFollowing(artist.name)' -->
-		<ion-toggle ng-repeat='artist in artists | filter:searchText | limitTo: feedLimit' class="item item-avatar"
-			 ng-change='updateFollowing(artist.name, $index)'
-			ng-model='followingArtists[artist.name]'>
+<ion-content ui-view>
 
-			<img ng-src='{{artist.images[artist.images.length-1].url}}'>
-			{{artist.name}}
-		</ion-toggle>
-		<button class="button button-outline button-positive"
-   ng-click="feedLimit = feedLimit + 10">Show More...</button>
-	</div>
+
+<!-- 
+<div>
+<ion-tabs class="tabs-positive tabs-icon-only">
+
+
+  <ion-tab title="home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline">
+	<a ui-sref="home"></a>
+
+  </ion-tab>
+
+  <ion-tab title="notified" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">	
+	<a ui-sref="notified"></a>
+
+  </ion-tab>
+</ion-tabs>
+</div>
+ -->
 </ion-content>
 
 
