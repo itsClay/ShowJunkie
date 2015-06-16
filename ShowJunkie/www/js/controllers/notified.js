@@ -1,3 +1,3 @@
-app.controller('notifiedCtrl', function ($scope) {
-	
+app.controller('notifiedCtrl', function ($scope, followingArtists) {
+	console.log(followingArtists)
 });
