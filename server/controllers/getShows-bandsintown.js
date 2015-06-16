@@ -6,12 +6,7 @@ var request = require('request'),
 	q = require('q'),
 	randomstring = require("randomstring");
 
-// http://api.eventful.com/
-// var EVENTFUL_ID = 'mTTxQb88hx8HNZhz';
-
 var followingRef = new Firebase('https://showjunkie.firebaseio.com/following');
-
-
 
 followingRef.on('value', function(snapshot){
 	var result = snapshot.val();

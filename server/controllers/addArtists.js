@@ -72,22 +72,57 @@ spotifyIds.forEach(function(spotifyId){
 		        console.log(error);
 		    } else {
 		    	var response = JSON.parse(body);
-		    	var ref = new Firebase(FIREBASE_URL + 'artists');
-		    	var fref = new Firebase(FIREBASE_URL + 'following/' + response.name);
+		    	// var ref = new Firebase(FIREBASE_URL + 'artists');
+		    	// var fref = new Firebase(FIREBASE_URL + 'following/' + response.name);
 
-		    	// Add to firebase
-		        ref.push({
-		        	name: response.name,
-		        	genres: response.genres,
-		        	images: response.images
-		        });
+		    	// // Add to firebase
+		     //    ref.push({
+		     //    	name: response.name,
+		     //    	genres: response.genres,
+		     //    	images: response.images
+		     //    });
 
-		        // Add to following
-		        fref.push('connorleech@gmail.com');
-		        fref.push('claydshaw@gmail.com');
+		     //    // Add to following
+		     //    fref.push('connorleech@gmail.com');
+		     //    fref.push('claydshaw@gmail.com');
 
-		        // hoooray!
-		        console.log('artists added!');
+		     //    // hoooray!
+		     //    console.log('artists added!');
+
+		        // Get events for artists
+		        var artistUrl = "http://api.bandsintown.com/artists/" + response.name + "/events/search.json";
+
+		        // send request to bandsintown
+				request({
+				    url: artistUrl,
+				    qs: {
+				    	app_id: 'HelloWorld',	// change this to avoid "rate limit exceeded"
+				    	api_version: '2.0',
+				    	location: 'Oakland'
+				    },
+				    method: 'GET',
+				}, function(error, response, body){
+
+				    if(error) {
+				        console.log('Error: Could not get events for ' + artist.name);
+				    } else {
+
+				    	// events array for particular artist
+				    	var artistEvents = JSON.parse(body);
+
+				    	 // add events to firebase
+				    	 var eventRef = new Firebase(FIREBASE_URL + 'events');
+
+				    	 artistEvents.forEach(function(e){
+
+				    	 	eventRef.push(e);
+				    	 });
+
+				    	 				
+				    }
+				});
+
+		       
 		    
 		    }
 		});
