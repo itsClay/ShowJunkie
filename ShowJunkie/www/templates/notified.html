@@ -10,11 +10,12 @@
 	    		<input type="text" placeholder="Show/Artist" data-ng-model="showSearchText">
 	    	</label>
 	    </div>
-	    <!-- ng-change='updateFollowing(artist.name)' -->
-		<ion-list ng-repeat='event in myEvents track by $index | filter:showSearchText' class="item item-avatar">
-			<img ng-src='{{event.thumb_url}}'>
-			{{event.title}} -	
-			<button class="button button-calm buy" href="https://google.com">Buy tickets</button>
+	    <!-- Lists Events -->
+	    <ion-list>
+			<ion-item ng-repeat='event in myEvents track by $index | filter:showSearchText' class="item item-avatar">
+			<img ng-src="{{event.artists[0].image_url}}">
+			{{event.title}} - {{event.thumb_url}}	
+			<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Buy tickets</a>
 			<br/>
 			{{event.formatted_datetime}}
 		</ion-list>
