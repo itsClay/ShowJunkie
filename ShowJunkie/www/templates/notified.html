@@ -1,7 +1,7 @@
 <ion-content>
 
-	<div class='list'>
-		<div class="item item-divider" style='margin-top:43px;'> 
+	<div class="list">
+		<div class="item item-divider" style="margin-top:43px;"> 
 	        Your Shows
 	    </div>
 	    <!-- Filter Search -->
@@ -10,10 +10,12 @@
 	    		<input type="text" placeholder="Show/Artist" data-ng-model="showSearchText">
 	    	</label>
 	    </div>
-	    <!-- ng-change='updateFollowing(artist.name)' -->
-		<ion-list ng-repeat='event in myEvents track by $index | filter:showSearchText | orderBy: "-formatted_datetime"' class="item item-avatar">
-			<img ng-src='{{event.thumb_url}}'>
-			{{event.title}} - <button class="button button-calm buy" ng-href='{{event.ticket_url}}{{event.ticket_status}}'>Buy tickets</button>
+	    <!-- Lists Events -->
+	    <ion-list>
+			<ion-item ng-repeat='event in myEvents track by $index | filter:showSearchText' class="item item-avatar">
+			<img ng-src="{{event.artists[0].image_url}}">
+			{{event.title}} - {{event.thumb_url}}	
+			<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Buy tickets</a>
 			<br/>
 			{{event.formatted_datetime}}
 		</ion-list>
@@ -22,22 +24,8 @@
 			<div class="item" id="showMore"
 			ng-click="feedLimit = feedLimit + 10">Show More...</div>
 		</div>
-		<br />
-	</div>
-	<!-- Navigation -->
-	<div>
-	  <ion-tabs class="tabs-positive tabs-icon-only">
-
-	    <ion-tab title="home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" href="#/">
-	    <!-- Tab 1 content -->
-	  	</ion-tab>
-
-	  	<ion-tab title="notified" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" href="#/notified">
-	    <!-- Tab 2 content -->
-	  	</ion-tab>
-
-	  </ion-tabs>
 	</div>
 </ion-content>
+	<div ng-include="'templates/navbar.html'"></div>
 
 
