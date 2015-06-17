@@ -39,27 +39,34 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
 
 
     $scope.artists = Artist.allArtists;
-    Notified.getFollowingArtists()
+    var curr_email = Auth.getCurrentUser();
+    console.log(curr_email)
 
     $scope.updateFollowing = function(artistName){
 
       var ref = new Firebase(FIREBASE_URL + 'following/' + artistName);
       var artistFollowing = $firebaseArray(ref);
 
-      if($rootScope.followingArtists[artistName]){
-        // current user follows artist
-        artistFollowing.$add(curr_email);
-      } else {
-        artistFollowing.$loaded().then(function(follower){
-          for(var key in follower){
-            if(follower[key].$value === curr_email){
-              // current user unfollows artist
-              artistFollowing.$remove(follower[key]);
-            }
-          }
+      Notified.getFollowingArtists().then(function(followList){
+        console.log(followList);
 
-        });
-      }
+        if(followList[artistName]){
+          // current user follows artist
+          artistFollowing.$add(curr_email);
+        } else {
+          artistFollowing.$loaded().then(function(follower){
+            for(var key in follower){
+              if(follower[key].$value === curr_email){
+                // current user unfollows artist
+                artistFollowing.$remove(follower[key]);
+              }
+            }
+
+          });
+        }
+
+      })
+      
     };
 
     $scope.feedLimit = 10;

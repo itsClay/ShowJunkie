@@ -23,3 +23,12 @@ generate key tool:
 ```
 $ keytool -exportcert alias_name -storepass showjunkie -keystore my-release-key.keystore | openssl sha1 -binary | openssl base64
 ```
+
+get your ios emulator device codes:
+```
+$ instruments -s devices
+$ tail -f ~/Library/Logs/CoreSimulator/<DEVICE_CODE>/system.log
+```
+
+so android can connect to internet:
+`ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git`

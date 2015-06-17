@@ -1,5 +1,5 @@
 
-app.factory('User', function(FIREBASE_URL, $firebaseArray, Auth){
+app.factory('User', function(FIREBASE_URL, $firebaseArray){
 	var ref = new Firebase(FIREBASE_URL + 'users');
 
 	var users = $firebaseArray(ref);

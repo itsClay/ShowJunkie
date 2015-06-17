@@ -1,5 +1,5 @@
 
-app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope, $cordovaOauth, FACEBOOK_ID){
+app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope, $cordovaOauth, FACEBOOK_ID, User){
 	var ref = new Firebase(FIREBASE_URL);
 
 	// authentication object returned by $firebaseAuth contains several 
@@ -41,8 +41,11 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope, $cordovaOa
 				auth.$authWithOAuthToken("facebook", result.access_token)
 					.then(function(authData) {
 		                var user_data = JSON.stringify(authData);
-		                var current = JSON.stringify(Auth.getCurrentUser());
-		                
+		                alert(user_data);
+
+		                // add to users table
+		                User.add(user_data);
+
 		                $state.go('home');
 
 		            }, function(error) {
