@@ -1,5 +1,5 @@
 
-app.controller('LoginCtrl', function($scope, Auth, $state, User){
+app.controller('LoginCtrl', function($scope, Auth, $state, User, $ionicPopup, $state){
 	$scope.user = {};
 
 	if(Auth.getCurrentUser() !== null){
@@ -65,8 +65,16 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 	};
 
 
-	$scope.resetPassword = function(){
-		// TODO
+	$scope.resetPassword = function(email){
+		Auth.resetPassword(email).then(function(){
+			$ionicPopup.alert({
+     			title: 'Password reset sent!',
+     			template: 'Check ur emailz'
+   			}).then(function(){
+   				$state.go('login');
+   			});
+
+		});
 	};
 
 });
