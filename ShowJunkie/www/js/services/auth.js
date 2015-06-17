@@ -26,7 +26,6 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
 					return res;
 				})
 				.catch(function(err){
-					console.log(err);
 					return err;
 				})
 		},
