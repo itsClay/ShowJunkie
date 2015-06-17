@@ -60,12 +60,6 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    .state('ionic-push-starter', {
-      url: "/home",
-      templateUrl: "templates/ionic-push-starter.html",
-      controller: 'pushCtrl'
-    })
-    // routes from the website...
     .state('home', {
       url: "/",
       templateUrl: "templates/main.html",
@@ -99,6 +93,10 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
       url: '/resetPassword',
       templateUrl: 'templates/resetPassword.html',
       controller: 'LoginCtrl'
+    })
+    .state('settings', {
+      url: '/settings',
+      templateUrl: 'templates/settings.html'
     })
 
   // if none of the above states are matched
