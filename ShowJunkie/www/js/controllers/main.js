@@ -1,5 +1,5 @@
 
-app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, FIREBASE_URL, $firebaseArray, Notified) {
+app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, Notified) {
   // Push notification stuff...
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
       console.log('Got token', data.token, data.platform);
@@ -37,29 +37,31 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
       
     }
 
-
     $scope.artists = Artist.allArtists;
-    Notified.getFollowingArtists()
+
+    // create object with artist name as key, value as true/false if following
+    Notified.getFollowingArtists().then(function(artistUserFollows){
+      $scope.followingArtists = artistUserFollows;
+    });
+
+    var curr_email = Auth.getCurrentUser().password.email;
 
     $scope.updateFollowing = function(artistName){
+      Notified.getFollowingArtists()
+        .then(function(artistUserFollows){
+          
+          // toggle scope map
+          $scope.followingArtists = artistUserFollows;
+          $scope.followingArtists[artistName] = !artistUserFollows[artistName];
 
-      var ref = new Firebase(FIREBASE_URL + 'following/' + artistName);
-      var artistFollowing = $firebaseArray(ref);
-
-      if($rootScope.followingArtists[artistName]){
-        // current user follows artist
-        artistFollowing.$add(curr_email);
-      } else {
-        artistFollowing.$loaded().then(function(follower){
-          for(var key in follower){
-            if(follower[key].$value === curr_email){
-              // current user unfollows artist
-              artistFollowing.$remove(follower[key]);
-            }
+          // toggle in firebase
+          if(artistUserFollows[artistName]){
+            Follows.followArtist(artistName, curr_email);
+          } else {
+            Follows.unfollowArtist(artistName, curr_email);
           }
-
         });
-      }
+      
     };
 
     $scope.feedLimit = 10;

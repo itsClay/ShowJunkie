@@ -13,11 +13,6 @@ app.factory('User', function(FIREBASE_URL, $firebaseArray, Auth){
 		},
 		get: function(id){
 			return users.$getRecord(id);
-		},
-		getCurrentUserSnapshot: function(){
-			// get current user snapshot
-			var email = Auth.getCurrentUser().password.email;
-			return ref.orderByChild('email').equalTo(email);
 		}
 	};
 });

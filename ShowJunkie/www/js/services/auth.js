@@ -26,12 +26,19 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseAuth, $rootScope){
 					return res;
 				})
 				.catch(function(err){
-					console.log(err);
 					return err;
 				})
 		},
 		logout: function(){
 			return auth.$unauth();
+		},
+		resetPassword: function(email){
+
+			return auth.$resetPassword({
+				email: email
+			}).then(function(email_sent){
+				return email_sent;
+			})
 		}
 	};
 

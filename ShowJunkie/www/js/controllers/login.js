@@ -1,5 +1,5 @@
 
-app.controller('LoginCtrl', function($scope, Auth, $state, User){
+app.controller('LoginCtrl', function($scope, Auth, $state, User, $ionicPopup, $state){
 	$scope.user = {};
 
 	if(Auth.getCurrentUser() !== null){
@@ -21,6 +21,13 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 		// register login credentials
 		Auth.registerNewUser($scope.user).then(function(simpleLogin){
+
+			if(simpleLogin.code === 'EMAIL_TAKEN'){
+				alert('Already account for that email. Try logging in');
+				$state.go('login');
+				return;
+			}
+
 			var newUser = angular.copy($scope.user);
 
 			// delete password for storage in users
@@ -28,7 +35,6 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 
 			// store uid to match to authentication
 			newUser = angular.extend(newUser, simpleLogin);
-			newUser.following = ['blink-182'];
 
 			// add user object to users
 			User.add(newUser).then(function(ref){
@@ -41,11 +47,12 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 						$state.go('home');
 					})
 					.catch(function(err){
+						$scope.error = err;
 						console.error('Error logging in: ' + err);
 					});
 
 			}).catch(function(err){
-				console.error('Error logging in: ' + err);
+				console.log('Error logging in: ' + err);
 			});
 			
 		});
@@ -58,8 +65,16 @@ app.controller('LoginCtrl', function($scope, Auth, $state, User){
 	};
 
 
-	$scope.resetPassword = function(){
-		// TODO
+	$scope.resetPassword = function(email){
+		Auth.resetPassword(email).then(function(){
+			$ionicPopup.alert({
+     			title: 'Password reset sent!',
+     			template: 'Check ur emailz'
+   			}).then(function(){
+   				$state.go('login');
+   			});
+
+		});
 	};
 
 });
