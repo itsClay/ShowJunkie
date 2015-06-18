@@ -50,7 +50,6 @@ app.factory('Notified', function(FIREBASE_URL, $firebaseArray, Auth){
 							
 							// only add unique events
 							if(events_for_current_user.indexOf(e) === -1){
-								console.log(e);
 								events_for_current_user.push(e);
 							}
 							
