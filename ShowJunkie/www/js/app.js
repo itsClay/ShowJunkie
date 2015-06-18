@@ -41,8 +41,9 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
     }
   });
 
-  // set current user
-  $rootScope.currentUser = Auth.authRef;
+  // set event count
+  $rootScope.myEvents = [];
+  $rootScope.count = 0;
 
   // protect routes, redirect to login page
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {

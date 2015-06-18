@@ -60,12 +60,8 @@ app.factory('Notified', function(FIREBASE_URL, $firebaseArray, Auth){
 
 				return events_for_current_user;
 			}).then(function(res){
-				console.log(res);
 				return res;
 			});
-
-		},
-		followArtist: function(){
 
 		}
 	};
