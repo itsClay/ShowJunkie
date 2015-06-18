@@ -2,7 +2,7 @@
 app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, Artist, User, Auth, Follows, Notified) {
   // Push notification stuff...
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-      console.log('Got token', data.token, data.platform);
+      // console.log('Got token', data.token, data.platform);
     });
     //Basic registration
     $scope.pushRegister = function() {
@@ -20,7 +20,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
     }
     $scope.identifyUser = function() {
       alert('Identifying');
-      console.log('Identifying user');
+      // console.log('Identifying user');
 
       var user = $ionicUser.get();
       if(!user.user_id) {
@@ -60,6 +60,12 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
           } else {
             Follows.unfollowArtist(artistName, curr_email);
           }
+
+          // update event count
+          Notified.getEventsForArtists(artistUserFollows).then(function(events_for_user){
+            $rootScope.myEvents = events_for_user;
+            $rootScope.count = events_for_user.length;
+          })
         });
     };
 
