@@ -13,3 +13,11 @@
 .platform-ios.platform-cordova:not(.fullscreen) .search-bar {
     margin-top: 20px;
 }
+
+.platform-ios ion-content {
+    margin-bottom: 60px !important;
+}
+
+.platform-android ion-content {
+	padding-top: 50px !important;
+}
