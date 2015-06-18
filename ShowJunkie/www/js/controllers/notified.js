@@ -7,5 +7,4 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 			$rootScope.count = events_for_user.length;
 		})
 	});
-
 });
