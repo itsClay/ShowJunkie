@@ -61,10 +61,8 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
             Follows.unfollowArtist(artistName, curr_email);
           }
         });
-      
     };
 
     $scope.feedLimit = 10;
-
 });
 
