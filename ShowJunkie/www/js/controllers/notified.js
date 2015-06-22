@@ -10,5 +10,11 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 	$scope.feedLimit = 3;
 	$scope.increaseFeed = function(){
 		$scope.feedLimit += 10;
+
+		if($scope.feedLimit >= $rootScope.myEvents.length){
+			$scope.feedLimit = $rootScope.myEvents.length;
+			console.log('feedlimit >= myEvents');
+		}
+		
 	};
 });
