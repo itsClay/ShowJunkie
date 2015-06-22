@@ -68,7 +68,5 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
           })
         });
     };
-
-    $scope.feedLimit = 10;
 });
 
