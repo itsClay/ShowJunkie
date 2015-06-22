@@ -12,10 +12,11 @@
 	    </div>
 	    <!-- Lists Events -->
 	    <ion-list>
+	    	<b>Showing {{feedLimit}}/{{myEvents.length}} shows</b>
 	    	<!-- TODO look into using collection-repeat over ng-repeat -->
 	    	<!-- https://github.com/driftyco/ionic/issues/1322 -->
 	    	<!-- the scrolling has been a known issue -->
-			<ion-item ng-repeat="event in myEvents | filter:showSearchText  | date:'yyyy-MM-ddTHH:mm:ssZ'" class="item item-avatar">
+			<ion-item ng-repeat="event in myEvents | filter:showSearchText  | date:'yyyy-MM-ddTHH:mm:ssZ' | limitTo: feedLimit" class="item item-avatar">
 			<img ng-src="{{event.artists[0].image_url}}">
 			{{event.title}} - {{event.thumb_url}}	
 			<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Buy tickets</a>
@@ -23,11 +24,12 @@
 			{{event.formatted_datetime}}
 		</ion-list>
 
-		<div class="list list-inset">
+		<div class="list list-inset" ng-if='myEvents.length > feedLimit'>
 			<div class="item" id="showMore"
-			ng-click="feedLimit = feedLimit + 10">Show More...</div>
+			ng-click="increaseFeed()">Show More...</div>
 		</div>
 	</div>
+
 </ion-content>
 	<div ng-include="'templates/navbar.html'"></div>
 

@@ -7,4 +7,8 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 			$rootScope.count = events_for_user.length;
 		})
 	});
+	$scope.feedLimit = 3;
+	$scope.increaseFeed = function(){
+		$scope.feedLimit += 10;
+	};
 });
