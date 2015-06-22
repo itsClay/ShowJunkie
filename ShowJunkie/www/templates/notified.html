@@ -16,12 +16,13 @@
 	    	<!-- TODO look into using collection-repeat over ng-repeat -->
 	    	<!-- https://github.com/driftyco/ionic/issues/1322 -->
 	    	<!-- the scrolling has been a known issue -->
-			<ion-item ng-repeat="event in myEvents | filter:showSearchText  | date:'yyyy-MM-ddTHH:mm:ssZ' | limitTo: feedLimit" class="item item-avatar">
-			<img ng-src="{{event.artists[0].image_url}}">
-			{{event.title}} - {{event.thumb_url}}	
-			<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Buy tickets</a>
-			<br/>
-			{{event.formatted_datetime}}
+			<ion-item ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit" class="item item-avatar">
+					<img ng-src="{{event.artists[0].image_url}}">
+					<h3>{{event.title}}</h3>
+					{{event.datetime | date: shortDate }}
+
+					<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Buy tickets</a>
+			</ion-item>
 		</ion-list>
 
 		<div class="list list-inset" ng-if='myEvents.length > feedLimit'>

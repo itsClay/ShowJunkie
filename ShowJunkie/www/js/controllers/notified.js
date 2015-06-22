@@ -5,6 +5,7 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 		Notified.getEventsForArtists(followList).then(function(events_for_user){
 			$rootScope.myEvents = events_for_user;
 			$rootScope.count = events_for_user.length;
+			console.log(events_for_user);
 		})
 	});
 	$scope.feedLimit = 10;
@@ -13,7 +14,6 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 
 		if($scope.feedLimit >= $rootScope.myEvents.length){
 			$scope.feedLimit = $rootScope.myEvents.length;
-			console.log('feedlimit >= myEvents');
 		}
 		
 	};

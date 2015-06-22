@@ -11,7 +11,7 @@
 	    	</label>
 	    </div>
 	    <b>Showing {{feedLimit}}/{{artists.length}} shows</b>
-		<ion-toggle ng-repeat="artist in artists | filter:searchText | limitTo: feedLimit" class="item item-avatar"
+		<ion-toggle ng-repeat="artist in artists | filter:searchText | limitTo: feedLimit" class="item item-avatar artist"
 			 ng-change="updateFollowing(artist.name, $index)"
 			ng-model="followingArtists[artist.name]">
 			<img ng-src="{{artist.images[artist.images.length-1].url}}">
@@ -20,7 +20,7 @@
 		<div class="list list-inset" ng-if='artists.length > feedLimit'>
 			<div class="item" id="showMore"
 				ng-click="increaseFeed()">Show More...</div>
-			</div>
+		</div>
 	</div>
 </ion-content>
 <div ng-include="'templates/navbar.html'"></div>
