@@ -43,7 +43,7 @@
     <ion-header-bar class="bar-positive">
         <h1 class="title">ShowJunkie</h1>
         <div class="buttons" ng-controller="LoginCtrl" ng-if="getCurrentUser()">
-            <p ng-bind="getCurrentUser().password.email">
+            <p ng-bind="getCurrentUser().password.email" style='margin-top:6px;'>
                 {{getCurrentUser().password.email}}
             </p>
             <button class="button" ng-click="logout()">Logout</button>

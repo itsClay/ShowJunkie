@@ -68,5 +68,15 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
           })
         });
     };
+
+    $scope.feedLimit = 25;
+    $scope.increaseFeed = function(){
+      $scope.feedLimit += 10;
+
+      if($scope.artists.length <= $scope.feedLimit){
+        $scope.feedLimit = $scope.artists.length;
+      }
+      
+    };
 });
 
