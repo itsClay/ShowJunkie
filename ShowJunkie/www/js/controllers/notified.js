@@ -1,4 +1,4 @@
-app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
+app.controller('notifiedCtrl', function ($scope, Notified, $rootScope, accordian){
 
 	Notified.getFollowingArtists().then(function(followList){
 

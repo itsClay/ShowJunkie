@@ -11,11 +11,13 @@
 	    	</label>
 	    </div>
 	    <!-- Lists Events -->
-	    <ion-list>
+	    <ion-list ng-controller="accordianCtrl">
 	    	<b>Showing {{feedLimit}}/{{myEvents.length}} shows</b>
 	    	<!-- TODO look into using collection-repeat over ng-repeat -->
 	    	<!-- the scrolling has been a known issue -->
-			<ion-item ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit" class="item item-avatar">
+			<ion-item ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit" class="item item-avatar item-accordian"
+				ng-click="toggleGroup(group)"
+				ng-class="{active:isGroupShown(group)}">
 					<img ng-src="{{event.artists[0].image_url}}">
 					<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Learn More</a>
 					<h3>{{event.title}}</h3>

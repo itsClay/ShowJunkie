@@ -1,6 +1,6 @@
 app.controller('accordionCtrl', function ($scope) {
-	$scope.groups = [];
-	
+	$scope.groups = ['asdfasdfasdfaklgjew;gjasdfasdfasgahdlfajkdlf;ajksld;jaig'];
+
 
 	$scope.accordianNotified = function (group) {
 		if ($scope.isGroupShown(group)) {
