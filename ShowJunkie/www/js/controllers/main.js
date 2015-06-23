@@ -69,7 +69,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $ionicPush, $ionicUser, 
         });
     };
 
-    $scope.feedLimit = 25;
+    $scope.feedLimit = 10;
     $scope.increaseFeed = function(){
       $scope.feedLimit += 10;
 

@@ -4,9 +4,13 @@ body {
 }
 
 #showMore {
-	margin-bottom: inherit;
+	/*margin-bottom: inherit;*/
 	text-align: center;
 	background-color: deepskyblue;
+}
+
+.bar .title {
+	position: relative;
 }
 
 .artist{
@@ -29,7 +33,7 @@ body {
 .platform-android ion-content {
 	padding-top: 50px !important;
 }
-
+/*
 .web {
 	margin-left: 25%;
-}
+}*/
