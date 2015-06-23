@@ -1,4 +1,7 @@
 /* Empty. Add your own CSS if you like */
+body {
+	background:img/ionic.png;
+}
 
 #showMore {
 	margin-bottom: inherit;
@@ -8,6 +11,7 @@
 
 .buy {
 	float: right;
+	background-color: rgba(0, 207, 255, 0.31);
 }
 
 .platform-ios.platform-cordova:not(.fullscreen) .search-bar {
@@ -20,4 +24,8 @@
 
 .platform-android ion-content {
 	padding-top: 50px !important;
+}
+
+.web {
+	margin-left: 25%;
 }

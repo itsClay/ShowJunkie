@@ -99,6 +99,20 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
       url: '/settings',
       templateUrl: 'templates/settings.html'
     })
+    .state('web_view', {
+      url: '/web_view',
+      templateUrl: 'templates/web_view.html',
+      controller: 'MainCtrl'
+    })
+    .state('web_notified', {
+      url: '/web_notified',
+      templateUrl: 'templates/web_notified.html',
+      controller: 'notifiedCtrl'
+    })
+    .state('web_settings', {
+      url: '/web_settings',
+      templateUrl: 'templates/web_settings.html'
+    })
 
   // if none of the above states are matched
   $urlRouterProvider.otherwise("/login");
