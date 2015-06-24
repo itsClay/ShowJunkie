@@ -20,7 +20,7 @@
 				ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit"
 				class="item item-avatar item-icon-right">
 					<img ng-src="{{event.artists[0].image_url}}">
-					<h3>{{ event.title }}</h3>
+					<h3 style="white-space: normal;">{{ event.title }}</h3>
 					<h5>{{ event.datetime | date:shortDate }}</h5>
 					<i class="icon ion-chevron-left button-dark"></i>
 				
