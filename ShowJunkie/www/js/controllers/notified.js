@@ -17,17 +17,9 @@ app.controller('notifiedCtrl', function ($scope, Notified, $rootScope){
 			$scope.feedLimit = $rootScope.myEvents.length;
 		}
 	};
-	// Accordion for longer description reading
 
-	$scope.toggleGroup = function (group) {
-		if ($scope.isGroupShown(group)) {
-			$scope.shownGroup = null;
-		} else {
-			$scope.shownGroup = group;
-		}
+	$scope.learnMore = function (url) {
+		window.open(url, '_blank');
 	};
 
-	$scope.isGroupShown = function (group) {
-		return $scope.shownGroup === group;
-	};
 });

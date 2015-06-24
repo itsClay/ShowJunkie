@@ -18,6 +18,10 @@ body {
 
 }
 
+.item {
+	white-space: normal;
+}
+
 .buy {
 	float: right;
 	background-color: rgba(0, 207, 255, 0.31);
@@ -51,4 +55,9 @@ body {
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
   display: block !important;
+}
+
+.button-icon-right {
+	float: right;
+	
 }
