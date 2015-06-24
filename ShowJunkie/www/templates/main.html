@@ -12,7 +12,7 @@
 	    </div>
 	    <b>Showing {{feedLimit}}/{{artists.length}} shows</b>
 		<ion-toggle ng-repeat="artist in artists | filter:searchText | limitTo: feedLimit" class="item item-avatar artist"
-			 ng-change="updateFollowing(artist.name, $index)"
+			ng-change="updateFollowing(artist.name, $index)"
 			ng-model="followingArtists[artist.name]">
 			<img ng-src="{{artist.images[artist.images.length-1].url}}">
 			{{artist.name}}
