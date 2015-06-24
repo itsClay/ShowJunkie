@@ -11,19 +11,24 @@
 	    	</label>
 	    </div>
 	    <!-- Lists Events -->
-	    <ion-list>
+	    <ion-list
+	    	show-delete="shouldShowDelete">
 	    	<b>Showing {{feedLimit}}/{{myEvents.length}} shows</b>
 	    	<!-- TODO look into using collection-repeat over ng-repeat -->
 	    	<!-- the scrolling has been a known issue -->
-			<ion-item ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit" class="item item-avatar">
+			<ion-item
+				ng-repeat="event in myEvents | filter:showSearchText | limitTo: feedLimit"
+				class="item item-avatar item-icon-right">
 					<img ng-src="{{event.artists[0].image_url}}">
-					<a class="button button-calm buy" href="{{event.ticket_url}}" target="_blank">Learn More</a>
-					<h3>{{event.title}}</h3>
-					<h5>{{event.datetime | date: shortDate }}</h5>
-
+					<h3 style="white-space: normal;">{{ event.title }}</h3>
+					<h5>{{ event.datetime | date:shortDate }}</h5>
+					<i class="icon ion-chevron-left button-dark"></i>
+				
+					<ion-option-button class="button-calm" ng-click="learnMore('{{event.ticket_url}}')">
+						Learn More
+					</ion-option-button>
 			</ion-item>
 		</ion-list>
-	
 
 		<div class="list list-inset" ng-if='myEvents.length > feedLimit'>
 			<div class="item" id="showMore"

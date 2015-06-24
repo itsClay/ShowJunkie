@@ -15,7 +15,12 @@ body {
 
 .artist{
 	padding-left: 5px;
+
 }
+/*
+.item h3 {
+	white-space: inherit;
+}*/
 
 .buy {
 	float: right;
@@ -33,7 +38,26 @@ body {
 .platform-android ion-content {
 	padding-top: 50px !important;
 }
-/*
+
 .web {
 	margin-left: 25%;
-}*/
+}
+
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.1s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.button-icon-right {
+	float: right;
+
+}

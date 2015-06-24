@@ -1,5 +1,5 @@
 
-app.controller('LoginCtrl', function($scope, Auth, $state, User, $ionicPopup, $state){
+app.controller('LoginCtrl', function($scope, Auth, $state, User, $ionicPopup){
 	$scope.user = {};
 
 	if(Auth.getCurrentUser() !== null){
