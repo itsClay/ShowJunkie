@@ -6,4 +6,5 @@ platforms/
 plugins/
 platform/
 .idea/
-my-release-key.keystore
+.DS_Store
+ShowJunkie/.DS_Store

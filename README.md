@@ -28,9 +28,10 @@ $ instruments -s devices
 $ tail -f ~/Library/Logs/CoreSimulator/<DEVICE_CODE>/system.log
 ```
 
-### Deploy to google play
+### Deploying to google play:
 
-```
+setup your project build
+```	
 $ cordova build --release android
 ```
 
@@ -46,4 +47,3 @@ $ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../my-release
  $ zipalign -v 4 /Users/connorleech/Projects/ShowJunkie/ShowJunkie/platforms/android/build/outputs/apk/android-release-unsigned.apk /Users/connorleech/Projects/ShowJunkie/ShowJunkie/platforms/android/build/outputs/apk/android-release-signed.apk
 ```
 
-![]()
